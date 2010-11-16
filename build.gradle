@@ -1,0 +1,74 @@
+subprojects {
+    apply plugin: 'java'
+    repositories {
+        flatDir name: 'localRepository', dirs: '../lib' 
+        
+        mavenCentral()
+        mavenRepo urls: "http://repository.jboss.org/maven2"
+        mavenRepo urls: "http://multiverse.googlecode.com/svn/maven-repository/releases/"
+        mavenRepo urls: "http://guiceyfruit.googlecode.com/svn/repo/releases/"
+        mavenRepo urls: "http://databinder.net/repo"
+        mavenRepo urls: "http://scala-tools.org/repo-releases/"
+        //mavenRepo urls: "http://www.scalablesolutions.se/akka/repository/" // comment out until Akka snapshot is back on line
+        mavenRepo urls: "https://repository.jboss.org/nexus/content/groups/public/"
+        mavenRepo urls: "https://repository.apache.org/content/repositories/releases/"
+    }
+    
+    dependencies {
+        
+        // 
+        compile ':akka-actor_2.8.0:1.0-M1'
+        compile ':akka-remote_2.8.0:1.0-M1'
+        compile ':akka-typed-actor_2.8.0:1.0-M1'
+        compile ':akka-http_2.8.0:1.0-M1'
+        compile ':akka-camel_2.8.0:1.0-M1'
+        // Transitive dependencies are explicit here
+        compile 'aopalliance:aopalliance:1.0'
+        compile 'org.atmosphere:atmosphere-annotations:0.6.2'
+        compile 'org.atmosphere:atmosphere-compat-jbossweb:0.6.2'
+        compile 'org.atmosphere:atmosphere-jersey:0.6.2'
+        compile 'org.atmosphere:atmosphere-runtime:0.6.2'
+        compile 'org.atmosphere:atmosphere-compat-tomcat:0.6.2'
+        
+        compile 'org.apache.camel:camel-core:2.5.0'
+        compile 'org.slf4j:slf4j-api:1.6.0'
+        compile 'ch.qos.logback:logback-classic:0.9.24'
+        compile 'ch.qos.logback:logback-core:0.9.24'
+        
+        compile 'org.scala-lang:scala-compiler:2.8.0'
+        compile 'org.scala-lang:scala-library:2.8.0'
+        compile 'com.eaio:uuid:3.2'
+        compile 'net.lag:configgy:2.8.0-1.5.5'
+        compile 'jsr166x:jsr166x:1.0'
+        compile 'com.google.protobuf:protobuf-java:2.3.0'
+        
+        // Other dependencies
+        compile 'javax.annotation:jsr250-api:1.0'
+        compile 'jgroups:jgroups:2.9.0.GA'
+        compile 'org.springframework:spring-aop:3.0.4.RELEASE'
+        compile 'org.springframework:spring-asm:3.0.4.RELEASE'
+        compile 'org.springframework:spring-core:3.0.4.RELEASE'
+        compile 'org.springframework:spring-expression:3.0.4.RELEASE'
+        compile 'org.springframework:spring-jms:3.0.4.RELEASE'
+        compile 'org.jboss.netty:netty:3.2.3.Final'
+        
+        testCompile group: 'junit', name: 'junit', version: '4.+'
+    }    
+}
+
+project(':AkkawebDemo1.0') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+
+    dependencies {
+        // Common
+        compile project(':common')
+    }
+}
+project(':AkkawebDemoClient') {
+    dependencies {
+        // Common
+        compile project(':common')
+    }
+}
+dependsOnChildren()

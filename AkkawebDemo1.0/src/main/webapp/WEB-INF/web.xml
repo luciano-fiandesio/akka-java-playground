@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+   <listener>
+    <listener-class>akka.servlet.Initializer</listener-class>
+    <!--    <listener-class>dk.tdc.sandbox.akka.MyInitializer</listener-class>    -->
+  </listener>
+
+    <servlet>
+        <servlet-name>Akka</servlet-name>
+        <servlet-class>akka.comet.AkkaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Akka</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
