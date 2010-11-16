@@ -1,4 +1,4 @@
-﻿apply plugin: 'war'
+apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'jetty'
 
