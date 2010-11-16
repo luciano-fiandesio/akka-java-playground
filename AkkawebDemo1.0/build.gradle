@@ -1,33 +1,33 @@
-apply plugin: 'war'
+﻿apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'jetty'
 
 ideaProject { 
-	javaVersion = '1.6' 
+    javaVersion = '1.6' 
 } 
 
 repositories {
     mavenCentral()
-	mavenRepo urls: "http://repository.jboss.org/maven2"
-	mavenRepo urls: "http://multiverse.googlecode.com/svn/maven-repository/releases/"
-	mavenRepo urls: "http://guiceyfruit.googlecode.com/svn/repo/releases/"
-	mavenRepo urls: "http://databinder.net/repo"
-	mavenRepo urls: "http://www.scalablesolutions.se/akka/repository/"
-	mavenRepo urls: "https://repository.jboss.org/nexus/content/groups/public/"
-	mavenRepo urls: "https://repository.apache.org/content/repositories/releases/"
+    mavenRepo urls: "http://repository.jboss.org/maven2"
+    mavenRepo urls: "http://multiverse.googlecode.com/svn/maven-repository/releases/"
+    mavenRepo urls: "http://guiceyfruit.googlecode.com/svn/repo/releases/"
+    mavenRepo urls: "http://databinder.net/repo"
+    mavenRepo urls: "http://www.scalablesolutions.se/akka/repository/"
+    mavenRepo urls: "https://repository.jboss.org/nexus/content/groups/public/"
+    mavenRepo urls: "https://repository.apache.org/content/repositories/releases/"
 }
 configurations {
     compile.exclude module: 'akka-core_2.8.0.Beta1'
 }
 dependencies {
-	compile 'se.scalablesolutions.akka:akka-actor_2.8.0:1.0-M1'
-	compile 'se.scalablesolutions.akka:akka-remote_2.8.0:1.0-M1'
-	compile 'se.scalablesolutions.akka:akka-typed-actor_2.8.0:1.0-M1'
+    compile 'se.scalablesolutions.akka:akka-actor_2.8.0:1.0-M1'
+    compile 'se.scalablesolutions.akka:akka-remote_2.8.0:1.0-M1'
+    compile 'se.scalablesolutions.akka:akka-typed-actor_2.8.0:1.0-M1'
     compile 'se.scalablesolutions.akka:akka-http_2.8.0:1.0-M1'
 
-	compile 'javax.annotation:jsr250-api:1.0'
+    compile 'javax.annotation:jsr250-api:1.0'
     compile 'jgroups:jgroups:2.9.0.GA'
-	compile 'org.springframework:spring-aop:3.0.4.RELEASE'
+    compile 'org.springframework:spring-aop:3.0.4.RELEASE'
     compile 'org.springframework:spring-asm:3.0.4.RELEASE'
     compile 'org.springframework:spring-core:3.0.4.RELEASE'
     compile 'org.springframework:spring-expression:3.0.4.RELEASE'
