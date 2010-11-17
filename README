@@ -1,0 +1,27 @@
+akka-java-playground
+
+http://akkasource.org/
+
+Sample code for testing out Akka Java API.
+
+1. Project structure and compile
+
+    There are 3 projects in the repository:
+
+    * AkkawebDemo1.0    : this is the 'server' project, where remote typed and untyped actors run.
+    * AkkawebDemoClient : 'client' project, where client actors are executed. Client actors normally invoke remote actors deployed in the server.
+    * common            : shared code.
+
+    To compile and run the code you need to install Gradle 0.9-rc1 (http://www.gradle.org/) 
+    Steps:
+    - Download and unzip Gradle (http://dist.codehaus.org/gradle/gradle-0.9-rc-1-all.zip)
+    - Follow installation instruction here: http://www.gradle.org/installation.html
+
+    After Gradle installation, run 'gradle clean build' in the project root folder.
+
+2. Generate Intellij Idea project file
+
+    run 'gradle idea' in one of the 3 project folders. The task will generate the .iml project file with all the dependencies set.
+    Open Idea, File --> New Module --> Import Existing Module --> Select .iml file
+
+3. 

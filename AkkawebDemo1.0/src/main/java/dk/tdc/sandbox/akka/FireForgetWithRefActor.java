@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class FireForgetWithRefActor extends UntypedActor {
     //private ThreadBasedDispatcher d = Dispatchers.newThreadBasedDispatcher(getContext());
     private BlockingProcess a = new BlockingProcess();
-    Logger logger = LoggerFactory.getLogger("dk.tdc.sandbox.akka");
+    private Logger logger = LoggerFactory.getLogger("dk.tdc.sandbox.akka");
 
     {
 

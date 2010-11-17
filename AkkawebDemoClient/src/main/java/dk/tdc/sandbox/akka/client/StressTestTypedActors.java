@@ -12,16 +12,18 @@ import java.util.List;
 import java.util.UUID;
 
 import akka.dispatch.Future;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StressTestTypedActors {
-
+    private static Logger logger = LoggerFactory.getLogger("dk.tdc.sandbox.akka.client");
     public void start(int actors) {
 
         List<Future<String>> futures = new ArrayList<Future<String>>();
 
-        System.out.println("....Start typed actor stress test");
+        logger.debug("....Start typed actor stress test");
         CustomerService[] services = startRing(actors);
-        System.out.println("---------------> " + services.length);
+        logger.debug("Created {} remote actors.", services.length);
         long initiateMethodCall = System.currentTimeMillis();
 
         for (CustomerService ref : services) {
@@ -30,28 +32,26 @@ public class StressTestTypedActors {
 
             //System.out.println(future.result().get());
             long afterM = System.currentTimeMillis();
-            System.out.println("milliseconds to call a typed actor: " + (afterM - beforeM));
+            logger.debug("milliseconds to call a typed actor: {}" , (afterM - beforeM));
         }
 
         for (Future<String> f : futures) {
             if (f.isCompleted()) {
-                System.out.println("Completed");
-                System.out.println("RESPONSE; + " + f.result().get());
+                logger.debug("Completed");
+                logger.debug("RESPONSE; + " + f.result().get());
             } else {
-                System.out.println("Incomplete");
+                logger.debug("Incomplete");
                 f.awaitBlocking();  // .await() seems buggy
                 //f.await();
-
-                System.out.println("RESPONSE; + " + f.result().get());
             }
         }
         long terminateMethodCall = System.currentTimeMillis();
-        System.out.println("\n==========================\n" + getElapsedTimeHoursMinutesSecondsString(terminateMethodCall - initiateMethodCall) + "\n==========================\n");
+        logger.debug("\n==========================\n" + getElapsedTimeHoursMinutesSecondsString(terminateMethodCall - initiateMethodCall) + "\n==========================\n");
     }
 
     private static CustomerService[] startRing(int n) {
 
-        System.out.println("Spawning actors...");
+        logger.debug("Spawning actors...");
         long startConstructing = System.currentTimeMillis();
         CustomerService[] nodes = new CustomerService[n];
         for (int i = 0; i < nodes.length; i++) {
@@ -61,7 +61,7 @@ public class StressTestTypedActors {
 
         long endConstructing = System.currentTimeMillis();
 
-        System.out.println("constructing :" + (endConstructing - startConstructing));
+        logger.debug("constructing :" + (endConstructing - startConstructing));
 
         return nodes;
     }

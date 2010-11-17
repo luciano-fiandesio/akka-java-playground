@@ -1,7 +1,8 @@
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'idea'
     repositories {
-        flatDir name: 'localRepository', dirs: '../lib' 
+        flatDir name: 'localRepository', dirs: "$rootProject.buildFile.parentFile.path/lib"
         
         mavenCentral()
         mavenRepo urls: "http://repository.jboss.org/maven2"
@@ -17,13 +18,14 @@ subprojects {
     dependencies {
         
         // 
-        compile ':akka-actor_2.8.0:1.0-M1'
-        compile ':akka-remote_2.8.0:1.0-M1'
-        compile ':akka-typed-actor_2.8.0:1.0-M1'
-        compile ':akka-http_2.8.0:1.0-M1'
-        compile ':akka-camel_2.8.0:1.0-M1'
+        compile ':akka-actor_2.8.0:1.0-SNAPSHOT'
+        compile ':akka-remote_2.8.0:1.0-SNAPSHOT'
+        compile ':akka-typed-actor_2.8.0:1.0-SNAPSHOT'
+        compile ':akka-http_2.8.0:1.0-SNAPSHOT'
+        compile ':akka-camel_2.8.0:1.0-SNAPSHOT'
         
-        // Transitive dependencies are explicit here
+        // AKKA Transitive dependencies are explicit here
+        // As soon as Akka snapshot is available in Maven repo, the dependencies can be removed.
         compile 'aopalliance:aopalliance:1.0'
         compile 'org.atmosphere:atmosphere-annotations:0.6.2'
         compile 'org.atmosphere:atmosphere-compat-jbossweb:0.6.2'
@@ -61,26 +63,31 @@ subprojects {
         compile 'org.jboss.netty:netty:3.2.3.Final'
         
         testCompile group: 'junit', name: 'junit', version: '4.+'
-    }    
+    }
+
 }
 
 project(':AkkawebDemo1.0') {
     apply plugin: 'war'
     apply plugin: 'jetty'
-
+    
+    
     dependencies {
         // Common
         compile project(':common')
     }
+    
 }
 project(':AkkawebDemoClient') {
-    apply plugin: 'idea'
-    //ideaProject { 
-    //    javaVersion = '1.6' 
-    //} 
     dependencies {
         // Common
         compile project(':common')
+        compile 'com.beust:jcommander:1.7'
     }
 }
+
+task startServer(dependsOn: ':AkkawebDemo1.0:jettyRun') << {
+    println 'starting Akka with jetty'
+}
+
 dependsOnChildren()
