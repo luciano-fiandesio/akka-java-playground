@@ -22,6 +22,7 @@ subprojects {
         compile ':akka-typed-actor_2.8.0:1.0-M1'
         compile ':akka-http_2.8.0:1.0-M1'
         compile ':akka-camel_2.8.0:1.0-M1'
+        
         // Transitive dependencies are explicit here
         compile 'aopalliance:aopalliance:1.0'
         compile 'org.atmosphere:atmosphere-annotations:0.6.2'
@@ -41,6 +42,13 @@ subprojects {
         compile 'net.lag:configgy:2.8.0-1.5.5'
         compile 'jsr166x:jsr166x:1.0'
         compile 'com.google.protobuf:protobuf-java:2.3.0'
+        compile 'org.codehaus.aspectwerkz:aspectwerkz-nodeps-jdk5:2.2.2'
+        compile 'org.codehaus.aspectwerkz:aspectwerkz-jdk5:2.2.2'
+        compile 'commons-io:commons-io:1.4'
+        compile 'commons-codec:commons-codec:1.4'
+        compile 'org.codehaus.jackson:jackson-mapper-asl:1.4.3'
+        compile 'org.codehaus.jackson:jackson-core-asl:1.4.3'
+        compile 'sjson.json:sjson:0.8-2.8.0'
         
         // Other dependencies
         compile 'javax.annotation:jsr250-api:1.0'
@@ -66,6 +74,10 @@ project(':AkkawebDemo1.0') {
     }
 }
 project(':AkkawebDemoClient') {
+    apply plugin: 'idea'
+    //ideaProject { 
+    //    javaVersion = '1.6' 
+    //} 
     dependencies {
         // Common
         compile project(':common')
