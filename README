@@ -1,8 +1,9 @@
 akka-java-playground
 
-http://akkasource.org/
+Sample code for testing out and learning the Akka framework's Java API.
 
-Sample code for testing out Akka Java API.
+AKKA: http://akkasource.org/
+
 
 1. Project structure and compile
 
@@ -28,6 +29,13 @@ Sample code for testing out Akka Java API.
     
     At the moment the process for running the tests is quite rudimental. There are two "Stress tests" in the AkkawebDemoClient.
     One is used to test concurrency for Untyped actors, the second for testing concurrency in the Typed Actors.
+    
+    The current tests are meant for testing remote actors, therefore the Akka server has to be started before launching the tests.
+    Open a console, cd to AkkawebDemo1.0 folder and run
+        gradle clean jettyRun
+        
+    This should start the Akka server.
+    
     To run the stress test for Untyped actors, cd to the AkkawebDemoClient folder and run:
         gradle clean runUntypedTest -i
     To run the stress test for Typed actors, cd to the AkkawebDemoClient folder and run:
