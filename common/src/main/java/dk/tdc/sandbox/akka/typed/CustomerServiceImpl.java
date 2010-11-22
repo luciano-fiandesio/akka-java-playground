@@ -12,7 +12,7 @@ public class CustomerServiceImpl extends TypedActor implements CustomerService  
 
     @Override
     public Future<String> getCustomer(String id) {
-        logger.debug("\n*************\nMessage received\n*************");
+        logger.warn("\n*************\nMessage received\n*************");
         return  future (blockingActor.block(id))  ;
     }
 }

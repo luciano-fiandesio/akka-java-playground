@@ -18,11 +18,11 @@ subprojects {
     dependencies {
         
         // 
-        compile ':akka-actor_2.8.0:1.0-SNAPSHOT'
-        compile ':akka-remote_2.8.0:1.0-SNAPSHOT'
-        compile ':akka-typed-actor_2.8.0:1.0-SNAPSHOT'
-        compile ':akka-http_2.8.0:1.0-SNAPSHOT'
-        compile ':akka-camel_2.8.0:1.0-SNAPSHOT'
+        compile ':akka-actor:1.0-SNAPSHOT'
+        compile ':akka-remote:1.0-SNAPSHOT'
+        compile ':akka-typed-actor:1.0-SNAPSHOT'
+        compile ':akka-http:1.0-SNAPSHOT'
+        compile ':akka-camel:1.0-SNAPSHOT'
         
         // AKKA Transitive dependencies are explicit here
         // As soon as Akka snapshot is available in Maven repo, the dependencies can be removed.
@@ -84,10 +84,28 @@ project(':AkkawebDemoClient') {
         compile project(':common')
         compile 'com.beust:jcommander:1.7'
     }
+    
+    task runUntypedTest(dependsOn: build) << {
+        ant.java(classname: 'dk.tdc.sandbox.akka.client.StressTest', fork: true,  
+        classpath: "${sourceSets.main.runtimeClasspath.asPath}") {
+          arg(line: 'untyped')
+        }
+
+    }
+
+    task runTypedTest(dependsOn: build) << {
+        ant.java(classname: 'dk.tdc.sandbox.akka.client.StressTest', fork: true,
+        classpath: "${sourceSets.main.runtimeClasspath.asPath}")  {
+          arg(line: 'typed')
+        }
+
+    }
 }
 
 task startServer(dependsOn: ':AkkawebDemo1.0:jettyRun') << {
     println 'starting Akka with jetty'
 }
+
+
 
 dependsOnChildren()

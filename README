@@ -24,4 +24,13 @@ Sample code for testing out Akka Java API.
     run 'gradle idea' in one of the 3 project folders. The task will generate the .iml project file with all the dependencies set.
     Open Idea, File --> New Module --> Import Existing Module --> Select .iml file
 
-3. 
+3. Running the tests
+    
+    At the moment the process for running the tests is quite rudimental. There are two "Stress tests" in the AkkawebDemoClient.
+    One is used to test concurrency for Untyped actors, the second for testing concurrency in the Typed Actors.
+    To run the stress test for Untyped actors, cd to the AkkawebDemoClient folder and run:
+        gradle clean runUntypedTest -i
+    To run the stress test for Typed actors, cd to the AkkawebDemoClient folder and run:
+        gradle clean runUntypedTest -i
+        
+    Do not forget to add the -i flag, otherwise the output of the test will not be displayed on the console.

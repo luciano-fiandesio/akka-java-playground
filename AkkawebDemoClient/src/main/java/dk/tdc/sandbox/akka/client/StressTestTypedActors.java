@@ -21,9 +21,9 @@ public class StressTestTypedActors {
 
         List<Future<String>> futures = new ArrayList<Future<String>>();
 
-        logger.debug("....Start typed actor stress test");
+        logger.warn("....Start typed actor stress test");
         CustomerService[] services = startRing(actors);
-        logger.debug("Created {} remote actors.", services.length);
+        logger.warn("Created {} remote actors.", services.length);
         long initiateMethodCall = System.currentTimeMillis();
 
         for (CustomerService ref : services) {
@@ -32,26 +32,26 @@ public class StressTestTypedActors {
 
             //System.out.println(future.result().get());
             long afterM = System.currentTimeMillis();
-            logger.debug("milliseconds to call a typed actor: {}" , (afterM - beforeM));
+            logger.warn("milliseconds to call a typed actor: {}" , (afterM - beforeM));
         }
 
         for (Future<String> f : futures) {
             if (f.isCompleted()) {
-                logger.debug("Completed");
-                logger.debug("RESPONSE; + " + f.result().get());
+                logger.warn("Completed");
+                logger.warn("RESPONSE; + " + f.result().get());
             } else {
-                logger.debug("Incomplete");
+                logger.warn("Incomplete");
                 f.awaitBlocking();  // .await() seems buggy
                 //f.await();
             }
         }
         long terminateMethodCall = System.currentTimeMillis();
-        logger.debug("\n==========================\n" + getElapsedTimeHoursMinutesSecondsString(terminateMethodCall - initiateMethodCall) + "\n==========================\n");
+        logger.warn("\n==========================\n" + getElapsedTimeHoursMinutesSecondsString(terminateMethodCall - initiateMethodCall) + "\n==========================\n");
     }
 
     private static CustomerService[] startRing(int n) {
 
-        logger.debug("Spawning actors...");
+        logger.warn("Spawning actors...");
         long startConstructing = System.currentTimeMillis();
         CustomerService[] nodes = new CustomerService[n];
         for (int i = 0; i < nodes.length; i++) {
@@ -61,7 +61,7 @@ public class StressTestTypedActors {
 
         long endConstructing = System.currentTimeMillis();
 
-        logger.debug("constructing :" + (endConstructing - startConstructing));
+        logger.warn("constructing :" + (endConstructing - startConstructing));
 
         return nodes;
     }
